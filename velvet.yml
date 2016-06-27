@@ -1,0 +1,14 @@
+install:
+- apt-get update && apt-get install -yq build-essential libmysqlclient-dev git ca-certificates python2.7-dev python3.4-dev python-pip python-virtualenv libffi-dev libssl-dev
+- pip install --upgrade pip wheel virtualenv
+
+before_script:
+- pip install .
+
+tasks:
+  lint:
+    script: nox -s lint
+  py27:
+    script: nox -s "interpreters(version='2.7')"
+  py34:
+    script: nox -s "interpreters(version='3.4')"
